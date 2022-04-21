@@ -11,6 +11,7 @@ export class Servidor {
 
     //ATRIBUTO app donde almaceno la funcionalidad de express 
        this.app = express()
+       this.llamarAuxiliares()
        this.atenderServicios()
 
     }
@@ -22,12 +23,16 @@ export class Servidor {
     }
 
     atenderServicios(){
-
         this.app.use('/',rutas)
-
-        
     }
 
+    
+
     conectarconBd(){}
+
+    llamarAuxiliares(){
+        //ACTIVO LA RECEPCIÓN DE DATOS POR EL BODY DE LA PETICION
+        this.app.use(express.json())
+    }
 
 }

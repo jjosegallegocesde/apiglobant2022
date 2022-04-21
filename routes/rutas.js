@@ -12,24 +12,12 @@ let controaldorHabitacion=new ControladorHabitacion()
 //DEFINO LAS RUTAS
 
 //RUTAS PARA LOS SERVICIOS DE HABITACIONES
-//1.Servicio Agregar habitacion
+
 rutas.post('/api/v1/habitaciones/',controaldorHabitacion.insertar)
-//2. Servicio para buscar TODAS las habitaciones
-rutas.get('/api/v1/habitaciones/', function (req, res) {
-    res.send('Hello World')
-})
-//3. Servicio para buscar UNA HABITACION POR ID
-rutas.get('/api/v1/habitaciones/id/', function (req, res) {
-    res.send('Hello World')
-})
-//4. Servicio para EDITAR UNA HABITACION POR ID
-rutas.put('/api/v1/habitaciones/id/', function (req, res) {
-    res.send('Hello World')
-})
-//4. Servicio para eliminar UNA HABITACION POR ID
-rutas.delete('/api/v1/habitaciones/id/', function (req, res) {
-    res.send('Hello World')
-})
+rutas.get('/api/v1/habitaciones/', controaldorHabitacion.buscarTodos)
+rutas.get('/api/v1/habitaciones/:id/', controaldorHabitacion.buscarPorId)
+rutas.put('/api/v1/habitaciones/:id/', controaldorHabitacion.editar)
+rutas.delete('/api/v1/habitaciones/:id/', controaldorHabitacion.eliminar)
 
 //RUTAS PARA LOS SERVICIOS DE RESERVAS
 //1.Servicio Agregar reserva

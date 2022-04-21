@@ -4,15 +4,8 @@ export class ControladorHabitacion{
 
     constructor(){}
 
-    insertar(request,response){
-        //Recibir los datos de la peticion
-        let datosPeticion=request.body
-
-        //Conectar con BD
-
-        //Ejecuto la consulta (INSERTE)
-
-        //Envio la repsuesta
+    insertar(request,response){ 
+        let datosPeticion=request.body //Recibo datos BODY
         response.status(200).json({
             mensaje:"exito en el ingreso de datos",
             datosIngresados:datosPeticion,
@@ -21,12 +14,42 @@ export class ControladorHabitacion{
 
     }
 
-    buscarTodos(){}
+    buscarTodos(request,response){
+        let datosPrueba=[{nombre:"hab1",precio:300000},{nombre:"hab2",precio:400000}] //quitar cuando tenagngomos BD
+        response.status(200).json({
+            mensaje:"exito buscando la información",
+            datos:datosPrueba,
+            estado:true
+        })
+    }
 
-    buscarPorId(){}
+    buscarPorId(request,response){
+        let id=request.params.id //El id que llega por la URL
+        response.status(200).json({
+            mensaje:"exito buscando habitación por id",
+            datos:"Datos del id: "+id,
+            estado:true
+        })
+    }
 
-    editar(){}
+    editar(request,response){
+        let id=request.params.id //El id que llega por la URL
+        let datosPeticion=request.body //Recibo datos BODY
+        response.status(200).json({
+            mensaje:"exito editando habitación por id",
+            datos:"Datos del id: "+id,
+            estado:true
+        })
+    }
 
-    eliminar(){}
+    eliminar(request,response){
+        let id=request.params.id //El id que llega por la URL
+        response.status(200).json({
+            mensaje:"exito eliminando habitación por id",
+            datos:"Datos del id: "+id,
+            estado:true
+        })
+
+    }
 
 }
