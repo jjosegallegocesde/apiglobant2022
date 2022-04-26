@@ -4,15 +4,12 @@ import express from 'express'
 import {ControladorHabitacion} from '../controllers/ControladorHabitacion.js'
 
 export let rutas=express.Router()
-
-
 //CREO UN OBJETO DE LA CLASE CONTORLADORHABITACION
 let controaldorHabitacion=new ControladorHabitacion()
 
 //DEFINO LAS RUTAS
 
 //RUTAS PARA LOS SERVICIOS DE HABITACIONES
-
 rutas.post('/api/v1/habitaciones/',controaldorHabitacion.insertar)
 rutas.get('/api/v1/habitaciones/', controaldorHabitacion.buscarTodos)
 rutas.get('/api/v1/habitaciones/:id/', controaldorHabitacion.buscarPorId)
