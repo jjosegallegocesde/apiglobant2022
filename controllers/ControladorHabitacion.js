@@ -8,13 +8,32 @@ export class ControladorHabitacion{
 
     constructor(){}
 
-    insertar(request,response){ 
+    async insertar(request,response){
+        let servicio=new ServicioHabitacion() 
         let datosPeticion=request.body //Recibo datos BODY
-        response.status(200).json({
-            mensaje:"exito en el ingreso de datos",
-            datosIngresados:datosPeticion,
-            estado:true
-        })
+
+        try{
+
+            await  servicio.registrar(datosPeticion) //Espero a que els ervicio guarde los datos
+
+            response.status(200).json({
+                mensaje:"exito en el ingreso de datos",
+                datosIngresados:[],
+                estado:true
+            })
+
+        }catch(error){
+
+            response.status(400).json({
+                mensaje:"fallamos en el ingreso de datos",
+                datosIngresados:[],
+                estado:false
+            })
+
+        }
+
+
+        
 
     }
 
