@@ -11,30 +11,20 @@ export class ControladorHabitacion{
     async insertar(request,response){
         let servicio=new ServicioHabitacion() 
         let datosPeticion=request.body //Recibo datos BODY
-
         try{
-
             await  servicio.registrar(datosPeticion) //Espero a que els ervicio guarde los datos
-
             response.status(200).json({
                 mensaje:"exito en el ingreso de datos",
                 datosIngresados:[],
                 estado:true
             })
-
         }catch(error){
-
             response.status(400).json({
                 mensaje:"fallamos en el ingreso de datos",
                 datosIngresados:[],
                 estado:false
             })
-
         }
-
-
-        
-
     }
 
     async buscarTodos(request,response){
@@ -76,24 +66,44 @@ export class ControladorHabitacion{
         }     
     }
 
-    editar(request,response){
+    async editar(request,response){
+        let servicio=new ServicioHabitacion()
         let id=request.params.id //El id que llega por la URL
         let datosPeticion=request.body //Recibo datos BODY
-        response.status(200).json({
-            mensaje:"exito editando habitación por id",
-            datos:"Datos del id: "+id,
-            estado:true
-        })
+
+        try{
+            await servicio.editar(id,datosPeticion)
+            response.status(200).json({
+                mensaje:"exito editando habitación por id",
+                datos:"Datos del id: "+id,
+                estado:true
+            })
+        }catch(error){
+            response.status(400).json({
+                mensaje:"fallamos editando habitación por id",
+                datos:[],
+                estado:false
+            })
+        }  
     }
 
-    eliminar(request,response){
+    async eliminar(request,response){
+        let servicio=new ServicioHabitacion()
         let id=request.params.id //El id que llega por la URL
-        response.status(200).json({
-            mensaje:"exito eliminando habitación por id",
-            datos:"Datos del id: "+id,
-            estado:true
-        })
-
+        try{
+            await servicio.eliminar(id)
+            response.status(200).json({
+                mensaje:"exito eliminando habitación por id",
+                datos:"Datos del id: "+id,
+                estado:true
+            })
+        }catch(error){
+            response.status(400).json({
+                mensaje:"fallamos eliminando habitación por id",
+                datos:"Datos del id: "+id,
+                estado:false
+            })
+        }
     }
 
 }
