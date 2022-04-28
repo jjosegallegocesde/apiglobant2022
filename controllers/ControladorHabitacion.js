@@ -1,3 +1,7 @@
+//Importamos el servicio HABITACION 
+//NOTA: UN CONTROLADOR PUEDE LLAMAR A VARIOS SERVICIOS
+import {ServicioHabitacion} from '../services/ServicioHabitacion.js'
+
 //CONTROLADOR TIENE LA LOGICA
 //DEL NEGOCIO
 export class ControladorHabitacion{
@@ -14,22 +18,43 @@ export class ControladorHabitacion{
 
     }
 
-    buscarTodos(request,response){
-        let datosPrueba=[{nombre:"hab1",precio:300000},{nombre:"hab2",precio:400000}] //quitar cuando tenagngomos BD
-        response.status(200).json({
-            mensaje:"exito buscando la información",
-            datos:datosPrueba,
-            estado:true
-        })
+    async buscarTodos(request,response){
+
+        //Instancio la clase servicio
+        //PARA PODERLA UTILIZAR
+        let servicio=new ServicioHabitacion()
+        try{
+            response.status(200).json({
+                mensaje:"exito buscando la información",
+                datos: await servicio.buscarTodos(),
+                estado:true
+            })
+        }catch(error){
+            response.status(400).json({
+                mensaje:"fallamos buscando la información",
+                datos: [],
+                estado:false
+            })
+        }
     }
 
-    buscarPorId(request,response){
+    async buscarPorId(request,response){
+        let servicio=new ServicioHabitacion()
         let id=request.params.id //El id que llega por la URL
-        response.status(200).json({
-            mensaje:"exito buscando habitación por id",
-            datos:"Datos del id: "+id,
-            estado:true
-        })
+
+        try{
+            response.status(200).json({
+                mensaje:"exito buscando habitación por id",
+                datos:await servicio.buscarPorId(id),
+                estado:true
+            })
+        }catch(error){
+            response.status(400).json({
+                mensaje:"fallamos buscando habitación por id",
+                datos:[],
+                estado:false
+            })
+        }     
     }
 
     editar(request,response){
